@@ -106,29 +106,7 @@ router.post("/createuser",[authorize,isAdmin], userController.createUser);
  *                  description: Server Not Responding
  * */
 router.post("/login", userController.login);
-/**
- * @swagger
- * /api/user/getusers/:
- *      post:
- *          summary: Get all Users
- *          tags: [User]
- *         
- *             
- *          responses:
- *              200:
- *                  description: Array of all users except admin
- *                  content:
- *                      application/json:
- *                          schema:
- *                              type: array
- *                              items:
- *                                  $ref: '#/components/schemas/User'
- *              500:
- *                  description: Server Not Responding
- *          security:
- *              - bearerAuth: []
- * */
 
-router.post("/getusers", [authorize, isAdmin], userController.getAllUsers);
+
 
 module.exports = router;

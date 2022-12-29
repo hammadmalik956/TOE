@@ -5,6 +5,7 @@ const { validateUser, validateLogin } = require("../models/user");
 const { JWT_SECRET_KEY } = require("../constants");
 const { validationError } = require("../utils");
 
+// Creating User 
 const createUser = async (req, res) => {
   // if there are errors , return Bad request and the errors
   const { error } = validateUser(req.body);
@@ -42,6 +43,7 @@ const createUser = async (req, res) => {
   }
 };
 
+//Logining controller
 const login = async (req, res) => {
   // if there are errors , return Bad request and the errors
   const { error } = validateLogin(req.body);
@@ -80,20 +82,9 @@ const login = async (req, res) => {
   }
 };
 
-const getAllUsers = async (req, res) => {
-  try {
-    const users = await User.find({ isAdmin: { $exists: false } }).select(
-      "-password"
-    );
-    res.send(users);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send("Internal Server Error");
-  }
-};
 
 module.exports = {
   createUser,
   login,
-  getAllUsers,
+  
 };

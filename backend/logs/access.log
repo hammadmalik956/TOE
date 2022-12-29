@@ -120,3 +120,12 @@ POST 401 ( /api/user/createuser ) ( 2022-12-17T07:43:38.169Z ) 0.695 ms
 POST 200 ( /api/user/createuser ) ( 2022-12-17T07:43:52.260Z ) 243.340 ms
 POST 400 ( /api/user/createuser ) ( 2022-12-17T07:46:10.942Z ) 2.985 ms
 POST 200 ( /api/user/login ) ( 2022-12-17T07:46:19.502Z ) 99.546 ms
+POST 404 ( //api/user/createuser ) ( 2022-12-29T11:09:30.776Z ) 1.681 ms
+POST 401 ( /api/user/createuser ) ( 2022-12-29T11:10:08.049Z ) 2.343 ms
+POST 401 ( /api/user/createuser ) ( 2022-12-29T11:10:37.909Z ) 2.851 ms
+POST 400 ( /api/user/createuser ) ( 2022-12-29T11:10:49.577Z ) 9.597 ms
+POST 200 ( /api/user/createuser ) ( 2022-12-29T11:11:29.505Z ) 129.123 ms
+POST 401 ( /api/user/createuser ) ( 2022-12-29T11:13:46.499Z ) 3.115 ms
+POST 401 ( /api/user/createuser ) ( 2022-12-29T11:17:51.510Z ) 3.738 ms
+POST 200 ( /api/user/login ) ( 2022-12-29T11:20:26.820Z ) 124.574 ms
+POST 400 ( /api/user/createuser ) ( 2022-12-29T11:20:49.240Z ) 5.457 ms
