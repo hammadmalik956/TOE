@@ -1,11 +1,14 @@
-import LoginForm from './components/Login';
+import LoginForm from './components/Login/Index';
+import { Routes, Route } from "react-router-dom";
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <LoginForm></LoginForm>
-    </div>
+    <>
+      <Routes>
+        <Route exact path="/" element={<LoginForm />} />
+      </Routes>
+    </>
   );
 }
 
