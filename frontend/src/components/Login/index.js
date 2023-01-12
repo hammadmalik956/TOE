@@ -11,17 +11,18 @@ import { useSnackbar } from 'notistack';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Form } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import bookrec from '../../assets/bookrec.json';
 
 
 const LoginForm=() => {
-  const [ veteranLogin, {data,error} ]=useUserLoginMutation();
+  const [ veteranLogin]=useUserLoginMutation();
 
   const navigate=useNavigate();
 
 
-  const head="Login to make a smart connection";
+  const head="Login to make a smart record";
 
-  const subHead="VeteranMeet provide smarter way of connecting with professionals, in few easy steps you can find prefessionals with same interest";
+  const subHead="Kistae provide a new smart way to recording the sales of goods&accessories on installments";
 
   const { enqueueSnackbar }=useSnackbar();
 
@@ -42,11 +43,12 @@ const LoginForm=() => {
     const {data,error}=await veteranLogin( creds )
 
     
-      console.log(data);
+      
 
     
     
     if ( data ) {
+      console.log(data);
       localStorage.setItem( "user", JSON.stringify( data) );
       setLoading( false );
       
@@ -69,6 +71,7 @@ const LoginForm=() => {
   
     else {
       setLoading( false );
+      console.log(error);
       
      
       enqueueSnackbar(error.data.message, { variant: 'error' } );
@@ -96,7 +99,7 @@ const LoginForm=() => {
 
       <div className="col-lg-6">
 
-        <SideBox image="illustrations2.png" width="30rem" heading={head} subHeading={subHead} />
+        <SideBox animation={bookrec} width="30rem" heading={head} subHeading={subHead} />
 
       </div>
 
