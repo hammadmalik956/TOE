@@ -3,23 +3,22 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { validateUser, validateLogin } = require("../models/user");
 const { JWT_SECRET_KEY } = require("../constants");
-const { validationError } = require("../utils");
+const { validationError, sendResponse } = require("../utils");
+
 
 // Creating User 
 const createUser = async (req, res) => {
   // if there are errors , return Bad request and the errors
   const { error } = validateUser(req.body);
   if (error) {
-    return res.status(400).json({ validationError: validationError(error) });
+    return sendResponse(res, "error", 422, validationError(error));
   }
   // check whether the user with same email exist already
-  try {
+  
     let user = await User.findOne({ email: req.body.email });
     if (user) {
-      return res
-        .status(400)
-        .json({ error: "Sorry the User with this email already exist" });
-    }
+      return sendResponse(res,"error",400,req.t("Sorry the User with this email already exist"));
+       }
     const salt = await bcrypt.genSalt(10);
     const secPass = await bcrypt.hash(req.body.password, salt);
     user = await User.create({
@@ -36,11 +35,8 @@ const createUser = async (req, res) => {
     };
     const authtoken = jwt.sign(data, JWT_SECRET_KEY);
 
-    res.json({ authtoken });
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send("Internal Server Error");
-  }
+   sendResponse(res,"success",200,req.t("User Created",authtoken));
+  
 };
 
 //Logining controller
@@ -48,26 +44,23 @@ const login = async (req, res) => {
   // if there are errors , return Bad request and the errors
   const { error } = validateLogin(req.body);
   if (error) {
-    return res.status(400).json({ validationError: validationError(error) });
+    return sendResponse(res, "error", 422, validationError(error));
   }
 
   const { email, password } = req.body;
 
-  try {
+  
     let user = await User.findOne({ email });
 
     if (!user) {
-      return res
-        .status(400)
-        .json({ error: "Please login with correct credentials" });
+      return sendResponse(res,"error",401,"Please login with correct credentials");
     }
     const passwordCompare = await bcrypt.compare(password, user.password);
 
-    if (!passwordCompare) {
-      return res
-        .status(400)
-        .json({ error: "Please login with correct credentials" });
+    if (!passwordCompare) { 
+      return sendResponse(res,"error",401,"Please login with correct credentials");
     }
+    user.password = undefined;
     const data = {
       user: {
         id: user.id,
@@ -75,16 +68,15 @@ const login = async (req, res) => {
       },
     };
     const authtoken = jwt.sign(data, JWT_SECRET_KEY);
-    res.json({ authtoken });
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send("Internal Server Error");
-  }
+    
+    return sendResponse(res,"success",200,"Succesfully Logged In",user,authtoken);
+   
+  
 };
 
 
 module.exports = {
   createUser,
   login,
-  
+
 };

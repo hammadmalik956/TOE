@@ -1,6 +1,6 @@
 import React from 'react'
-import SideBox from './../Generic/SideBox';
-import InputField from './../Generic/InputField';
+import SideBox from '../Generic/SideBox';
+import InputField from '../Generic/InputField';
 import './../Generic/credForm.css'
 import { Link } from 'react-router-dom';
 import { useState, useContext, useRef } from 'react';
@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const LoginForm=() => {
-  const [ veteranLogin ]=useUserLoginMutation();
+  const [ veteranLogin, {data,error} ]=useUserLoginMutation();
 
   const navigate=useNavigate();
 
@@ -39,15 +39,18 @@ const LoginForm=() => {
   const handleSubmit=async ( e ) => {
     setLoading( true );
     try{
-    const res=await veteranLogin( creds )
-
-    console.log( res )
+    const {data,error}=await veteranLogin( creds )
 
     
-    if ( res.data.status==="success" ) {
-      localStorage.setItem( "user", JSON.stringify( res.data.data.user ) );
+      console.log(data);
+
+    
+    
+    if ( data ) {
+      localStorage.setItem( "user", JSON.stringify( data) );
       setLoading( false );
-      Cookies.set( 'jwt', res.data.token );
+      
+      Cookies.set( 'jwt', data.result );
       // const decoded=jwt_decode( res.data.web_token );
 
       // console.log( decoded );
@@ -57,23 +60,26 @@ const LoginForm=() => {
       formRef.current.resetFields();
       setCreds( { email: "", password: "" } );
       enqueueSnackbar( "Logged in successfully!", { variant: 'success' } );
-      setTimeout( () => { navigate( '/dashboard' ) }, 2000 );
+      //setTimeout( () => { navigate( '/dashboard' ) }, 2000 );
 
-      localStorage.setItem("userType","veteran")
+      localStorage.setItem("userType","admin")
 
       
     }
+  
     else {
       setLoading( false );
-      enqueueSnackbar( res.data.message, { variant: 'error' } );
+      
+     
+      enqueueSnackbar(error.data.message, { variant: 'error' } );
       
     }
     
     
   }
-    catch(e){}
+    catch(e){ console.log(e)}
 
-
+    
 
 
   }
@@ -100,8 +106,8 @@ const LoginForm=() => {
 
           <div className="form_top_content">
 
-            <h1 className="text-center">Welcome back Veterans</h1>
-            <p className="text-center">Please enter your veteran account details to login.</p>
+            <h1 className="text-center">Welcome back ShopKeeper</h1>
+            <p className="text-center">Please enter your account details to login.</p>
 
 
             <Form className='row g-2' ref={formRef} style={{ marginTop: "5rem" }} onFinish={handleSubmit}>
@@ -160,19 +166,6 @@ const LoginForm=() => {
 
         </div>
 
-        <div className="move_signup text-center">
-          <p>
-            Don't have an vateran account?
-            <Link to="/signup" className="ms-2 inline_link">Create Veteran Account</Link>
-          </p>
-
-
-
-          <p>
-            You can also create Organization
-            <Link to="/organization/signup" className="ms-2 inline_link">Create Organization</Link>
-          </p>
-        </div>
 
 
 

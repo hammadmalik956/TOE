@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { authorize, isAdmin } = require("../middlewares");
 const { userController } = require("../controllers");
+const { errorCatcher } = require("../errors");
+
 require("dotenv").config();
 
 /**
@@ -80,7 +82,7 @@ require("dotenv").config();
  *              - bearerAuth: []
  * */
 
-router.post("/createuser",[authorize,isAdmin], userController.createUser);
+router.post("/createuser",[authorize,isAdmin], errorCatcher(userController.createUser));
 
 /**
  * @swagger
@@ -105,7 +107,7 @@ router.post("/createuser",[authorize,isAdmin], userController.createUser);
  *              500:
  *                  description: Server Not Responding
  * */
-router.post("/login", userController.login);
+router.post("/login", errorCatcher(userController.login));
 
 
 
