@@ -8,5 +8,7 @@
         "URL": "mongodb://localhost:27017/",
         "USERNAME": "username",
         "PASSWORD": "password"
-    }
+    },
+    "SMTPEMAIL":"hammadhameed955@gmail.com",
+    "SMTPPASS":"vypqow-xekkuk-hywQo7"
 }

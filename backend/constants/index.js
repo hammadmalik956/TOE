@@ -16,5 +16,8 @@ module.exports = {
   
 
     ADMIN: "ADMIN",
-    USER: "USER"
+    USER: "USER",
+    SMTPEMAIL:config.get("SMTPEMAIL"),
+    SMTPPASS:config.get("SMTPPASS")
+
 }

@@ -43,7 +43,7 @@ const LoginForm=() => {
     const {data,error}=await veteranLogin( creds )
 
     
-      
+       console.log(data);
 
     
     

@@ -110,5 +110,12 @@ router.post("/createuser",[authorize,isAdmin], errorCatcher(userController.creat
 router.post("/login", errorCatcher(userController.login));
 
 
+// Update Password
+router.post("/update-password",[authorize,isAdmin],errorCatcher(userController.updatePassword));
+
+// Forgot Password
+router.post("/forgot-password",errorCatcher(userController.forgotPassword));
+
+
 
 module.exports = router;

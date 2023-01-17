@@ -20,6 +20,10 @@ const UserSchema = new Schema({
     type: String,
   },
   isAdmin: Boolean,
+  token:{
+    type:String,
+    default: ''
+  }
 });
 // validating user for creation
 const validateUser = (user) => {
