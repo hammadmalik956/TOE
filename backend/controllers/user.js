@@ -16,8 +16,9 @@ const createUser = async (req, res) => {
   // check whether the user with same email exist already
 
   let user = await User.findOne({ email: req.body.email });
+  console.log(user);
   if (user) {
-    return sendResponse(res, "error", 400, req.t("Sorry the User with this email already exist"));
+    return sendResponse(res, "error", 400, "Sorry the User with this email already exist");
   }
 
   const secPass = await generatePassword(req.body.password);
@@ -28,6 +29,8 @@ const createUser = async (req, res) => {
     employementstatus: req.body.employementstatus,
     isAdmin: req.body.isAdmin,
   });
+  //unsetting user password
+  user.password =undefined;
   const data = {
     user: {
       id: user.id,
@@ -35,7 +38,7 @@ const createUser = async (req, res) => {
   };
   const authtoken = jwt.sign(data, JWT_SECRET_KEY);
 
-  sendResponse(res, "success", 200, req.t("User Created", authtoken));
+  sendResponse(res, "success", 200, "User Created", user,authtoken);
 
 };
 
@@ -119,11 +122,31 @@ const forgotPassword = async (req, res) => {
 
 };
 
+const resetPassword = async(req,res)=>{
+  const token = req.query.token;
+  
+  const tokenData = await User.findOne({token:token});
+  if(tokenData){
+    const newPassword = req.body.password;
+    const secPassword = await generatePassword(newPassword);
+    const userData = await User.findByIdAndUpdate({_id:tokenData.id},{$set:{password:secPassword,token:''}},{new:true});
+    userData.password = undefined;
+    return sendResponse(res, "success", 200, "Password Reset Successfull",userData);
+
+  }
+  else{
+    return sendResponse(res, "failure", 400, "Link Has Expired");
+  }
+
+
+};
+
 
 module.exports = {
   createUser,
   login,
   updatePassword,
-  forgotPassword
+  forgotPassword,
+  resetPassword
 
 };

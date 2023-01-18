@@ -36,6 +36,7 @@ const isPasswordMatched = async (actualPassword, password) => {
 
 const sendResetPasswordMail = async(name,email,token)=>{
    const transporter = nodemailer.createTransport({
+        service: "gmail",
         host:'smtp.gmail.com',
         port:587,
         secure:false,
@@ -50,7 +51,7 @@ const sendResetPasswordMail = async(name,email,token)=>{
         from:SMTPEMAIL,
         to:email,
         subject:"Reset Password",
-        html:'<p>HI '+name+' You requested password resetting click on the following link to proceed<br><a href ="http://127.0.0.1:3000/api/reset-password?token='+token+'">reset your password</a></p>'
+        html:'<p>HI '+name+' You requested password resetting click on the following link to proceed<br></p><a href ="http://localhost:4000/api/user/reset-password?token='+token+'">reset your password</a>'
 
 
     }
@@ -64,7 +65,7 @@ const sendResetPasswordMail = async(name,email,token)=>{
             
             console.log("Mail Sent",info.response);
         }
-    })
+    });
 
 }
 

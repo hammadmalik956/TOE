@@ -111,10 +111,13 @@ router.post("/login", errorCatcher(userController.login));
 
 
 // Update Password
-router.post("/update-password",[authorize,isAdmin],errorCatcher(userController.updatePassword));
+router.post("/update-password",[authorize],errorCatcher(userController.updatePassword));
 
 // Forgot Password
 router.post("/forgot-password",errorCatcher(userController.forgotPassword));
+
+//Rest Password
+router.get("/reset-password",errorCatcher(userController.resetPassword));
 
 
 
