@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { DATABASE_URL, DATABASE_NAME } = require("../constants");
 const User = require("./user");
+const Sale = require("./sales");
 mongoose.set('strictQuery', false);
 
 const connectToMongo = () => {
@@ -12,4 +13,4 @@ const connectToMongo = () => {
   });
 };
 
-module.exports = {connectToMongo, User};
+module.exports = {connectToMongo, User,Sale};

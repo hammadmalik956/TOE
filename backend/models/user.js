@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
+const { required } = require("joi");
 const { Schema,model } = mongoose;
 
 const UserSchema = new Schema({
@@ -19,6 +20,10 @@ const UserSchema = new Schema({
   employementstatus: {
     type: String,
   },
+  branchcode:{
+    type:String,
+    required:true
+  },
   isAdmin: Boolean,
   token:{
     type:String,
@@ -32,6 +37,8 @@ const validateUser = (user) => {
       email: Joi.string().lowercase().required().email(),
       password: Joi.string().required().min(6).max(15),
       employementstatus: Joi.string().max(8),
+      branchcode: Joi.string().required().max(3),
+      isAdmin:Joi.boolean()
       
   });
   return schema.validate(user);

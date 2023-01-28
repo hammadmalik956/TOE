@@ -26,6 +26,7 @@ const createUser = async (req, res) => {
     name: req.body.name,
     password: secPass,
     email: req.body.email,
+    branchcode:req.body.branchcode,
     employementstatus: req.body.employementstatus,
     isAdmin: req.body.isAdmin,
   });
