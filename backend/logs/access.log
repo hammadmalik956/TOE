@@ -1615,3 +1615,15 @@ POST 401 ( /api/user/login ) ( 2023-01-21T10:54:09.582Z ) 15.374 ms
 POST 403 ( /api/user/createuser ) ( 2023-01-21T10:54:38.052Z ) 4.031 ms
 POST 200 ( /api/user/createuser ) ( 2023-01-21T10:54:50.555Z ) 138.322 ms
 POST 200 ( /api/user/login ) ( 2023-01-21T10:54:59.357Z ) 125.230 ms
+POST 200 ( /api/user/login ) ( 2023-01-28T21:33:25.252Z ) 180.391 ms
+POST 500 ( /api/sale/createsale ) ( 2023-01-28T21:43:08.945Z ) 6.790 ms
+POST 422 ( /api/sale/createsale ) ( 2023-01-28T21:46:17.894Z ) 12.711 ms
+POST 422 ( /api/sale/createsale ) ( 2023-01-28T21:47:01.614Z ) 13.138 ms
+POST 500 ( /api/sale/createsale ) ( 2023-01-28T21:47:19.118Z ) 14.958 ms
+POST 500 ( /api/sale/createsale ) ( 2023-01-28T21:49:00.137Z ) 14.745 ms
+POST 422 ( /api/sale/createsale ) ( 2023-01-28T21:50:51.128Z ) 9.997 ms
+POST 422 ( /api/sale/createsale ) ( 2023-01-28T21:51:05.994Z ) 5.447 ms
+POST 500 ( /api/sale/createsale ) ( 2023-01-28T21:51:13.556Z ) 3.298 ms
+POST 200 ( /api/sale/createsale ) ( 2023-01-28T21:58:58.290Z ) 75.516 ms
+POST 200 ( /api/sale/createsale ) ( 2023-01-28T22:00:05.444Z ) 32.372 ms
+POST 200 ( /api/sale/createsale ) ( 2023-01-28T22:04:12.541Z ) 30.868 ms

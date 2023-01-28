@@ -33,9 +33,37 @@ const salesSchema = new Schema({
       type: Number,
       required: true
    },
-   
+
 
 });
+// validating sale 
+const validateSale = (sale) => {
+   const schema = Joi.object().keys({
+      buyer: Joi.object({
+         name: Joi.string().required().min(5),
+         cnic: Joi.string().required().length(15),
+         address: Joi.string().required().max(20),
+         contact: Joi.string().required().length(11)
+      }),
+      product: Joi.object({
+         name: Joi.string().required().min(5),
+         price: Joi.number().required(),
+         description: Joi.string().required().max(20)
+      }),
+      advAmount: Joi.number(),
+      installment: Joi.object({
+         month: Joi.string().required().max(10),
+         amount: Joi.number().required(),
+         status: Joi.string().required(),
+         payDate: Joi.date().iso().required()
+      }),
+      totalInstal: Joi.number().required()
+
+
+   });
+   return schema.validate(sale);
+};
 
 
 module.exports = model('sale', salesSchema);
+module.exports.validateSale = validateSale;
