@@ -3,7 +3,7 @@ const Joi = require("joi");
 const { required } = require("joi");
 const { Schema,model } = mongoose;
 
-const UserSchema = new Schema({
+const branchSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -31,7 +31,7 @@ const UserSchema = new Schema({
   }
 });
 // validating user for creation
-const validateUser = (user) => {
+const validateBranch = (user) => {
   const schema = Joi.object().keys({
       name: Joi.string().required().min(3),
       email: Joi.string().lowercase().required().email(),
@@ -56,6 +56,6 @@ const validateLogin = (user) => {
 };
 
 
-module.exports =  model("user", UserSchema);
-module.exports.validateUser = validateUser;
+module.exports =  model("branch", branchSchema);
+module.exports.validateBranch = validateBranch;
 module.exports.validateLogin = validateLogin;

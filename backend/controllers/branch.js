@@ -1,6 +1,6 @@
-const User = require("../models/user");
+const User = require("../models/branch");
 const jwt = require("jsonwebtoken");
-const { validateUser, validateLogin } = require("../models/user");
+const { validateBranch, validateLogin } = require("../models/branch");
 const { JWT_SECRET_KEY } = require("../constants");
 const randomstring = require('randomstring');
 const { validationError, sendResponse, generatePassword, isPasswordMatched, sendResetPasswordMail } = require("../utils");
@@ -9,7 +9,7 @@ const { validationError, sendResponse, generatePassword, isPasswordMatched, send
 // Creating User 
 const createUser = async (req, res) => {
   // if there are errors , return Bad request and the errors
-  const { error } = validateUser(req.body);
+  const { error } = validateBranch(req.body);
   if (error) {
     return sendResponse(res, "error", 422, validationError(error));
   }

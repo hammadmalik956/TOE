@@ -23,7 +23,7 @@ app.use(compression());
 
 
 app.use("/api/docs", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(docOptions)));
-app.use('/api/user/', require('./routes/user'))
+app.use('/api/user/', require('./routes/branch'))
 
 app.use('/api/sale/', require('./routes/sale'))
 

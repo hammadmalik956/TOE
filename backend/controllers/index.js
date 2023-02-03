@@ -1,4 +1,4 @@
-const userController = require("./user");
+const userController = require("./branch");
 const saleController = require("./sales");
 
 module.exports = {

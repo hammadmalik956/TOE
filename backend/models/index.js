@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { DATABASE_URL, DATABASE_NAME } = require("../constants");
-const User = require("./user");
+const User = require("./branch");
 const Sale = require("./sales");
 mongoose.set('strictQuery', false);
 
