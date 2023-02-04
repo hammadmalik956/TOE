@@ -11,6 +11,11 @@ const createSale = async (req, res) => {
     if (error) {
         return sendResponse(res, "error", 422, validationError(error));
     }
+
+    // total number of installments
+    const installcount = req.body.product.totalInstal;
+    const instalmentInterval = 30; // days
+    
     const saledata = await Sale.findOne({ buyer: req.body.buyer })
     if (!saledata) {
         // creating sale
@@ -21,6 +26,11 @@ const createSale = async (req, res) => {
             guaranter: req.body.guaranter,
 
         })
+        // creating installment period
+        
+        for (let i = 1; i <= installcount; i++) {
+            await Sale.updateOne({ _id: sale._id,"product._id": sale.product[0]._id},{ $push: { "product.$.installmentDueDate":new Date(Date.now() + i * instalmentInterval * 24 * 60 * 60 * 1000)  } })
+          }
         sendResponse(res, "success", 200, "Sale Created", sale);
     }
     else {
@@ -104,10 +114,27 @@ const addProduct = async (req, res) => {
     //     return sendResponse(res, "error", 422, validationError(error));
     // }
 
+        // total number of installments
+        const installcount = req.body.product.totalInstal;
+        const instalmentInterval = 30; // days
     const sdata = await Sale.findById({_id:sale_id});
 
     if (sdata) {
-        await Sale.updateOne({_id:sale_id},{$push:{product:product}});
+
+        // pushing  product into sale
+      await Sale.updateOne({_id:sale_id},{$push:{product:product}},{new:true});
+        // // pushing installdue date 
+        //  // creating installment period
+        // //finding length of product arrary
+            const productsize = sdata.product.length;
+             // again finding the sale because its updated
+             const finddata = await Sale.findById({_id:sale_id});
+            
+         for (let i = 1; i <= installcount; i++) {
+            await Sale.updateOne({ _id: sale_id,"product._id": finddata.product[productsize]._id},{ $push: { "product.$.installmentDueDate":new Date(Date.now() + i * instalmentInterval * 24 * 60 * 60 * 1000)  } })
+          }
+
+
        
         return sendResponse(res, "Success", 200, "Product Added");
     }

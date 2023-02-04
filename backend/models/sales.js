@@ -20,6 +20,7 @@ const salesSchema = new Schema({
    },
 
    product: [{
+      installmentDueDate:[ {type: Date}],
       advAmount: Number,
       name: String,
       price: Number,
@@ -58,6 +59,7 @@ const validateSale = (sale) => {
          contact: Joi.string().required().length(11)
       }),
       product: Joi.object({
+        
          name: Joi.string().required().min(5),
          price: Joi.number().required(),
          description: Joi.string().required().max(20),
