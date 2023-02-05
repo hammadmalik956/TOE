@@ -6,25 +6,32 @@ const salesSchema = new Schema({
    saleCreatedBy: { type: Schema.Types.ObjectId, ref: 'branch' },
    buyer: {
       name: String,
-      cnic: String,
+      cnic:{type:String,unique:true} ,
       address: String,
-      contact: String
-
+      contact: String,
+      pictures: [{
+         type: String,
+       }]
    },
    guaranter: {
       name: String,
-      cnic: String,
+      cnic:{type:String,unique:true},
       address: String,
-      contact: String
+      contact: String,
+      pictures: [{
+         type: String,
+       }]
 
    },
 
    product: [{
+      cleared: Boolean,
       installmentDueDate:[ {type: Date}],
       advAmount: Number,
       name: String,
       price: Number,
       description: String,
+      
 
       installment: [{
          month: String,
@@ -32,7 +39,10 @@ const salesSchema = new Schema({
          status: String,
          payDate: Date
       }],
-      totalInstal: Number
+      totalInstal: Number,
+      pictures: [{
+         type: String,
+       }]
 
    }],
 
@@ -50,16 +60,18 @@ const validateSale = (sale) => {
          name: Joi.string().required().min(5),
          cnic: Joi.string().required().length(15),
          address: Joi.string().required().max(20),
-         contact: Joi.string().required().length(11)
+         contact: Joi.string().required().length(11),
+         pictures: Joi.string()
       }),
       guaranter: Joi.object({
          name: Joi.string().required().min(5),
          cnic: Joi.string().required().length(15),
          address: Joi.string().required().max(20),
-         contact: Joi.string().required().length(11)
+         contact: Joi.string().required().length(11),
+         pictures: Joi.string()
       }),
       product: Joi.object({
-        
+         cleared:Joi.boolean(),
          name: Joi.string().required().min(5),
          price: Joi.number().required(),
          description: Joi.string().required().max(20),
@@ -72,6 +84,7 @@ const validateSale = (sale) => {
             status: Joi.string().required(),
             payDate: Joi.date().iso().required()
          }),
+         pictures: Joi.string()
       }),
 
 

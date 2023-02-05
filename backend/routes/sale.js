@@ -21,6 +21,11 @@ router.post("/updatebuyer",[authorize,isAdmin], errorCatcher(saleController.upda
 router.post("/updategaurenter",[authorize,isAdmin], errorCatcher(saleController.updateGaurenter));
 // route for geting all sales information
 router.post("/getallsales",[authorize,isAdmin], errorCatcher(saleController.getAllSales));
-
+// route for geting all sales whose installment is comming soon
+router.post("/getcomingsale",[authorize,isAdmin], errorCatcher(saleController.getComingSales));
+// route for geting all sales withcnic
+router.get("/getusersale",[authorize,isAdmin], errorCatcher(saleController.getUserSale));
+// route for geting all sales cleared
+router.post("/getclearedsale",[authorize,isAdmin], errorCatcher(saleController.getClearedSale));
 
 module.exports = router;
