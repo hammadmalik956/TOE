@@ -25,7 +25,7 @@ const createSale = async (req, res) => {
             buyer: req.body.buyer,
             product: req.body.product,
             guaranter: req.body.guaranter,
-            
+
 
         })
         // creating installment period
@@ -156,13 +156,24 @@ const getAllSales = async (req, res) => {
 }
 // get all sales whose installment is due after 10 days
 const getComingSales = async (req, res) => {
-    console.log(Date())
-    const tenDaysFromNow = new Date(Date.now() + 18 * 24 * 60 * 60 * 1000); //10days from now
-    console.log(tenDaysFromNow)
-    const comingSale = await Sale.find({ "product.installmentDueDate": { $elemMatch: { $gte: tenDaysFromNow } } })
+
+    const tenDaysFromNow = new Date(Date.now() + 10 * 24 * 60 * 60 * 1000); //10days from now
+
+    const comingSale = await Sale.find({ "product.installmentDueDate": { $elemMatch: { $lte: tenDaysFromNow } } })
     return sendResponse(res, "Success", 200, "Got All Sales", comingSale);
-    // logic not perfect
+    // done
 }
+
+// get all sales whose installment is due after 10 days
+const getPendingSales = async (req, res) => {
+
+    const currentDate = new Date();
+
+    const pendingSale = await Sale.find({ "product.installmentDueDate": { $elemMatch: { $lt: currentDate } }},{"product.cleared": false })
+    return sendResponse(res, "Success", 200, "Got All Pending Sales", pendingSale);
+    // logic not correct yet
+}
+
 // get user sales with cnic 
 const getUserSale = async (req, res) => {
     const cnic = req.query.cnic;
@@ -176,11 +187,11 @@ const getUserSale = async (req, res) => {
 // get all cleared salses
 const getClearedSale = async (req, res) => {
 
-    const clearedsale = await Sale.aggregate([{$match: {product: { $exists: true, $ne: [] }} },{$addFields: {allCleared: {$reduce: {input: "$product",initialValue: true,in: { $and: ["$$value", "$$this.cleared"] }}}}},{$match: {allCleared: true}}]);
-   
-   
+    const clearedsale = await Sale.aggregate([{ $match: { product: { $exists: true, $ne: [] } } }, { $addFields: { allCleared: { $reduce: { input: "$product", initialValue: true, in: { $and: ["$$value", "$$this.cleared"] } } } } }, { $match: { allCleared: true } }]);
+
+
     return sendResponse(res, "Success", 200, "Got all Cleared Sale", clearedsale);
 
 }
 
-module.exports = { createSale, addInstall, addProduct, updateBuyer, updateGaurenter, getAllSales, getComingSales, getUserSale, getClearedSale };
+module.exports = { createSale, addInstall, addProduct, updateBuyer, updateGaurenter, getAllSales, getComingSales, getUserSale, getClearedSale, getPendingSales };
