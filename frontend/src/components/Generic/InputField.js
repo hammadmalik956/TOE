@@ -6,6 +6,7 @@ const InputField=( { label, name, placeholder, width="70%", margin, rules, defau
   return (
 
     <>
+   
       <div className={` ${margin}`} style={{ width: width }}>
         <label htmlFor={name} className="form-label">{label}</label>
 
