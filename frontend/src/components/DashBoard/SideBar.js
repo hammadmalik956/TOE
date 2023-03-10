@@ -6,60 +6,62 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import ReceiptIcon from '@mui/icons-material/Receipt';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
 const SideBar = () => {
     return (
-        <div className="flex h-screen bg-blue-50 font-sans text-gray-900">
-            <aside className=" flex h-screen w-64 flex-col items-center border-r border-blue-50  bg-purple-50 ml-2 rounded   ">
+        <div className="flex h-screen w-1/6 font-sans bg-white z-20 fixed  ">
+            <aside className=" flex   w-full  flex-col justify-start items-center      bg-white   rounded-r-xl shadow-gray-800  shadow-xl ">
 
-                <div className="flex h-18 w-full items-center justify-center border-b border-blue-50 ">
-
+                <div className="flex h-12 w-full items-center justify-center border-b border-gray-600 ">
+                    {/* logo */}
                 </div>
-                <nav className='flex flex-1 flex-col gap-y-4 pt-10'>
-                    <a className='flex flex-row items-center rounded py-2 px-3 bg-onyx-100 text-white hover:bg-onyx-50 ' href='#'>
+                <div className='flex flex-1 flex-col gap-y-1 pt-10  '>
+                    <a className='flex mb-2 justify-start items-center  py-2 px-3  hover:bg-gray-900  rounded-md group  hover:shadow-lg ' href='#'>
 
 
-                        <DashboardCustomizeRoundedIcon className='h-6 w-6 stroke-current' />
-                        <h1 className='mx-2 text-white font-semibold'>Dashboard</h1>
+                        <DashboardCustomizeRoundedIcon className='text-2xl text-gray-600 group-hover:text-white' />
+                        <h1 className=' mx-2 text-base text-gray-800 group-hover:text-white font-semibold'>Dashboard</h1>
                     </a>
 
-                    <a className="flex flex-row items-center rounded py-2 px-3  text-white  hover:bg-onyx-50  " href='#'>
+                    <a className='flex mb-2 justify-start items-center  py-2 px-3  hover:bg-gray-900  rounded-md group  hover:shadow-lg ' href='#'>
 
 
-                        <AddIcon className='h-6 w-6 stroke-current' />
-                        <h1 className='mx-2 text-white font-semibold hover:text-black'>Create Sale</h1>
+                        <AddIcon className='text-2xl text-gray-600 group-hover:text-white' />
+                        <h1 className=' mx-2 text-base text-gray-800 group-hover:text-white font-semibold'>Create Sale</h1>
                     </a>
                     {/* Creating Drop Downlist  */}
-                    <ul id="dropdown-example" className="  border-l border-blue-50  ml-12 ">
+                    <ul id="dropdown-example" className="    border-l-2 border-gray-600  ml-12 ">
                         <li>
-                            <a className="flex flex-row items-center rounded py-1 px-3  text-white  hover:bg-onyx-50  " href='#'>
+                            <a className='flex justify-start items-center   py-2 px-3 text-white hover:bg-gray-900  rounded-md  group hover:shadow-lg ' href='#'>
 
 
-                                <PersonAddIcon className='h-6 w-6 stroke-current' />
-                                <h1 className='mx-2 text-white font-semibold hover:text-black'>Buyer Info</h1>
+                                <PersonAddIcon className='text-2xl text-gray-600 group-hover:text-white' />
+                                <h1 className=' mx-2 text-base text-gray-800 group-hover:text-white font-semibold'>Buyer Information </h1>
                             </a>
                         </li>
                         <li>
-                            <a className="flex flex-row items-center rounded py-1 px-3  text-white  hover:bg-onyx-50  " href='#'>
+                            <a className='flex  justify-start items-center  py-2 px-3 text-white hover:bg-gray-900  rounded-md group  hover:shadow-lg ' href='#'>
 
 
-                                <SupervisedUserCircleIcon className='h-6 w-6 stroke-current' />
-                                <h1 className='mx-2 text-white font-semibold hover:text-black'>Gaurenter Info</h1>
+                                <SupervisedUserCircleIcon className='text-2xl text-gray-600 group-hover:text-white' />
+                                <h1 className=' mx-2 text-base text-gray-800 group-hover:text-white font-semibold'>Gaurenter Information</h1>
                             </a>
                         </li>
                         <li>
-                            <a className="flex flex-row items-center rounded py-1 px-3  text-white  hover:bg-onyx-50  " href='#'>
+                            <a className='flex  justify-start items-center  py-2 px-3 text-white hover:bg-gray-900  rounded-md group  hover:shadow-lg ' href='#'>
 
 
-                                <AddShoppingCartIcon className='h-6 w-6 stroke-current' />
-                                <h1 className='mx-2 text-white font-semibold hover:text-black'>Product Info</h1>
+                                <AddShoppingCartIcon className='text-2xl text-gray-600 group-hover:text-white' />
+                                <h1 className=' mx-2 text-base text-gray-800 group-hover:text-white font-semibold'>Product Information </h1>
                             </a>
                         </li>
                         <li>
-                            <a className="flex flex-row items-center rounded py-1 px-3  text-white  hover:bg-onyx-50  " href='#'>
+                            <a className='flex mb-2 justify-start items-center  py-2 px-3 text-white hover:bg-gray-900  rounded-md group  hover:shadow-lg ' href='#'>
 
 
-                                <ReceiptIcon className='h-6 w-6 stroke-current' />
-                                <h1 className='mx-2 text-white font-semibold hover:text-black'>Invoice Info</h1>
+                                <ReceiptIcon className='text-2xl text-gray-600 group-hover:text-white' />
+                                <h1 className=' mx-2 text-base text-gray-800 group-hover:text-white font-semibold'>Invoice Information</h1>
                             </a>
                         </li>
 
@@ -67,15 +69,39 @@ const SideBar = () => {
                     </ul>
 
 
-                    <a className='flex flex-row items-center rounded py-2 px-3  text-white  hover:bg-onyx-50 ' href='#'>
+                    <a className='flex my-2 justify-start items-center  py-2 px-3 text-white hover:bg-gray-900  rounded-md group  hover:shadow-lg  ' href='#'>
 
 
-                        <QueryStatsIcon className='h-6 w-6 stroke-current' />
-                        <h1 className='mx-2 text-white font-semibold '>View Sale</h1>
+                        <QueryStatsIcon className='text-2xl text-gray-600 group-hover:text-white' />
+                        <h3 className=' mx-2 text-base text-gray-800 group-hover:text-white font-semibold'>View Sale</h3>
                     </a>
 
 
-                </nav>
+                </div>
+
+                {/* setting  */}
+                <div className=" mt-4 border-b-2 border-gray-600 pb-4">
+                    <div className="flex mb-1 justify-start items-center gap-4 pl-5 hover:bg-gray-900 py-2 px-3 rounded-md group cursor-pointer hover:shadow-lg ">
+                        <SettingsIcon className="text-2xl text-gray-600 group-hover:text-white " />
+                        <h3 className="text-base text-gray-800 group-hover:text-white font-semibold ">
+                            Settings
+                        </h3>
+                    </div>
+
+
+                </div>
+
+                {/* logout */}
+                <div className=" my-4 ">
+                    <div className="flex mb-2 justify-start items-center gap-4 pl-5 border border-gray-600  hover:bg-gray-900 py-2 px-3 rounded-md group cursor-pointer hover:shadow-lg ">
+                        <LogoutIcon className="text-2xl text-gray-600 group-hover:text-white " />
+                        <h3 className="text-base text-gray-800 group-hover:text-white font-semibold ">
+                            Logout
+                        </h3>
+                    </div>
+                </div>
+
+
 
 
 
