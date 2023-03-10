@@ -7,7 +7,7 @@ const Buyer = (props) => {
   
   return (
 
-      <Form   onFinish={props.onFinish} initialValues={props.initialValues} className='p-10 mx-10 border-2  shadow-lg rounded-md'  >
+      <Form   onFinish={props.onFinish} initialValues={props.initialValues} >
         <div className='flex justify-between  items-center '>
           <div className='w-[50%] ' >
             <InputField name="bname" label="Name" placeholder="Buyer Name" width='60%' rules={[{
