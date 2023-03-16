@@ -34,10 +34,10 @@ const UploadPic = (props) => {
       file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
     );
   };
-
+  
   const handleChange = ({ fileList: newFileList }) =>
     setFileList(newFileList);
-
+  
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -59,6 +59,7 @@ const UploadPic = (props) => {
       >
         {fileList.length >= 2 ? null : uploadButton}
       </Upload>
+      
       <Modal
         open={previewOpen}
         title={previewTitle}

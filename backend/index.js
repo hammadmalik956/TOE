@@ -27,6 +27,7 @@ app.use('/api/user/', require('./routes/branch'))
 
 app.use('/api/sale/', require('./routes/sale'))
 
+app.use('/api/image/', require('./routes/upload'))
 
 app.listen(port, () => {
   console.log("SERVER RUNNING AT " + host + ":" + port);

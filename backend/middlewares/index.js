@@ -4,6 +4,7 @@ const { isAdmin } = require('./isAdmin');
 const { log_saver, logger } = require('./logger');
 const { myCorsPolicy } = require("./cors");
 const { limiter } = require("./limiter");
+const { upload } = require("./multer");
 
 const compression = require("compression");
 
@@ -14,5 +15,6 @@ module.exports = {
     helmet,
     myCorsPolicy,
     limiter,
-    compression
+    compression,
+    upload
 }
