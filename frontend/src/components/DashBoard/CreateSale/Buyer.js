@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Button } from "antd";
 import InputField from '../../Generic/InputField';
 import UploadPic from './UploadPic';
-import TakePic from './TakePic';
+
 
 const Buyer = (props) => {
 
@@ -17,7 +17,7 @@ const Buyer = (props) => {
         </div>
         <div className='flex'>
           <UploadPic action="http://localhost:4000/api/image/upload" />
-          <TakePic />
+         
           </div>
 
       </div>

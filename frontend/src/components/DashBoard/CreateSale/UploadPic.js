@@ -1,6 +1,7 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { Modal, Upload } from "antd";
-import React, { useState } from 'react';
+import { Modal, Upload,Button } from "antd";
+import React, { useState, useRef } from 'react';
+import { CameraOutlined } from "@ant-design/icons";
 
 
 
@@ -17,6 +18,47 @@ const getBase64 = (file) => {
 
 
 const UploadPic = (props) => {
+  // Camera Module
+  
+  const [cameraModalVisible, setCameraModalVisible] = useState(false);
+  const videoRef = useRef(null);
+
+  const handleCameraOpen = () => {
+    setCameraModalVisible(true);
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then((stream) => {
+        videoRef.current.srcObject = stream;
+        videoRef.current.play();
+        
+      })
+      .catch(error => console.error(error));
+  };
+  const handleCameraClose = () => {
+    const stream = videoRef.current.srcObject;
+    const tracks = stream.getTracks();
+    tracks.forEach(track => track.stop());
+    setCameraModalVisible(false);
+  };
+  const handleCapture = async () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = videoRef.current.videoWidth;
+    canvas.height = videoRef.current.videoHeight;
+    canvas.getContext('2d').drawImage(videoRef.current, 0, 0);
+    const dataURL = canvas.toDataURL();
+    
+    
+    
+      setFileList([ dataURL])
+      
+   // setImageSrc(dataURL);
+    
+
+    // Upload image to server
+    
+
+    handleCameraClose();
+  };
+  ////////
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
@@ -24,8 +66,10 @@ const UploadPic = (props) => {
 
   const handleCancel = () => setPreviewOpen(false);
   const handlePreview = async (file) => {
+    console.log(file)
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
+    
     }
 
     setPreviewImage(file.url || (file.preview));
@@ -44,8 +88,13 @@ const UploadPic = (props) => {
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
-
-      
+    console.log(fileList)
+  const takePicButton = (
+    <div>
+      <CameraOutlined />
+      <div style={{ marginTop: 8 }}>Take Image</div>
+    </div>
+  );
 
   return (
     <div>
@@ -64,9 +113,23 @@ const UploadPic = (props) => {
         open={previewOpen}
         title={previewTitle}
         footer={null}
+        
         onCancel={handleCancel}
       >
         <img alt="example" style={{ width: "100%" }} src={previewImage} />
+      </Modal>
+      <Button className="h-[102px]" onClick={handleCameraOpen}>{takePicButton}</Button>
+      <Modal
+        open={cameraModalVisible}
+        onCancel={handleCameraClose}
+        footer={[
+          <Button key="cancel" onClick={handleCameraClose}>Cancel</Button>,
+          <Button key="capture" type="primary" onClick={handleCapture}>Capture</Button>,
+        ]}
+      >
+       
+       <video ref={videoRef} autoPlay />
+       
       </Modal>
 
 
